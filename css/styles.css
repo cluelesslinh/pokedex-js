@@ -1,0 +1,30 @@
+.header-title {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.pokedex-whole {
+  background-color: Red;
+  display: flex;
+  margin: 100px 100px 100px 100px;
+}
+
+.pokedex-image {
+  background-color: Silver;
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  margin: 50px 50px 50px 50px;
+}
+
+.pokedex-description {
+  background-color: Silver;
+  display: inline-block;
+  width: 500px;
+  height: 300px;
+  margin: 50px 50px 50px 50px;
+  }
+
+.pokedex-description-text {
+  padding: 50px 50px 50px 50px;
+}
