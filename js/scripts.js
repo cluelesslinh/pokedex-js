@@ -1,9 +1,6 @@
-
-// IIFE pokemonRepository
 let pokemonRepository = (function () {
-
-let pokemonList = [
-{
+  let pokemonList = [
+    {
     name: 'Bulbasaur',
     height: 71.1,
     type: ['Grass', 'Poison']
@@ -17,38 +14,51 @@ let pokemonList = [
     name: 'Venusaur',
     height: 201,
     type: ['Grass', 'Poison']
-  }
+    },
   ];
 
-   return {
-      add: function(pokemon) {
-        pokemonList.push(pokemon);
-      },
-      getAll: function() {
-        return pokemonList;
-      }
-    };
-  })();
+  function add(pokemon) {
+    if (
+      typeof pokemon === "object" &&
+      "name" in pokemon &&
+      "height" in pokemon &&
+      "types" in pokemon
+    ) {
+      pokemonList.push(pokemon);
+    } else {
+      console.log("pokemon is not correct");
+    }
+  }
+  function getAll() {
+    return pokemonList;
+  }
+  function showDetails(pokemon) {
+    console.log(pokemon.name);
+  }
+  function addListItem(pokemon){
+    let pokemonList = document.querySelector(".pokemon-list");
+    let listpokemon = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("button-class");
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
+    button.addEventListener('click', function () {
+  showDetails(pokemon);
+});
+  }
+  return {
+    add: add,
+    getAll: getAll,
+    addListItem: addListItem,
+  };
 
-// pokemon add and getAll function
- console.log(pokemonRepository.getAll());
-pokemonRepository.add({ name: 'Pikachu', height: 40.6, type: ['Electric'] });
+})();
+
+pokemonRepository.add({ name: "Pikachu", height: 40.6, types: ["Electric"] });
+
 console.log(pokemonRepository.getAll());
 
-// function to show in browser
-  (function () {
-    pokemonRepository.getAll().forEach(function(pokemon) {
-        let pokemonName = pokemon.name
-        let pokemonHeight = pokemon.height
-
-        if(pokemonHeight > 200) {
-            document.write(pokemonName + ' (height : ' + pokemonHeight + ')' + ' - Wow, a huge Pokemon!');
-        } else if (pokemonHeight < 100) {
-          document.write(pokemonName + ' (height: ' + pokemonHeight + ') - Aw, a small Pokemon.');
-        }
-        else {
-            document.write(pokemonName + ' (height : ' + pokemonHeight + ')');
-        }
-            document.write('<br>', '<br>');
-        });
-})();
+pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.addListItem(pokemon);
+});

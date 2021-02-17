@@ -1,30 +1,28 @@
 .header-title {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
-.pokedex-whole {
-  background-color: Red;
+.pokedex-background {
+  background-color: #ed4224; /* Red */
   display: flex;
   margin: 100px 100px 100px 100px;
 }
 
-.pokedex-image {
-  background-color: Silver;
+.button-class {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
   display: inline-block;
-  width: 300px;
-  height: 300px;
-  margin: 50px 50px 50px 50px;
-}
-
-.pokedex-description {
-  background-color: Silver;
-  display: inline-block;
-  width: 500px;
-  height: 300px;
-  margin: 50px 50px 50px 50px;
-  }
-
-.pokedex-description-text {
-  padding: 50px 50px 50px 50px;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #4caf50;
 }
