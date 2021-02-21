@@ -31,7 +31,7 @@ let pokemonRepository = (function () {
   // Function to show modal
 
   let modalContainer = document.querySelector('.modal-container');
-  function showModal(title, text) {
+  function showModal(pokemon) {
     modalContainer.innerHTML = '';
     let modal = document.createElement('div');
     modal.classList.add('modal');
@@ -41,21 +41,20 @@ let pokemonRepository = (function () {
     closeButtonElement.innerText = 'Close';
     closeButtonElement.addEventListener('click', hideModal);
 
-    let titleElement = document.createElement('h1');
-    titleElement.innerText = title;
-
-    let contentElement = document.createElement('p');
-    contentElement.innerText = text;
+    let pokemonName = document.createElement('h1');
+    pokemonName.innerText = pokemon.name
 
     let pokemonImg = document.createElement('img');
-    pokemonImg.src = pokemon.image;
+    pokemonImg.src = pokemon.sprites.front_default
+
+    let pokemonHeight = document.createElement('p');
+    pokemonHeight.innerText = 'Height: ' + pokemon.height
 
     modal.appendChild(closeButtonElement);
-    modal.appendChild(titleElement);
-    modal.appendChild(contentElement);
+    modal.appendChild(pokemonName);
     modal.appendChild(pokemonImg);
+    modal.appendChild(pokemonHeight);
     modalContainer.appendChild(modal);
-
 
     modalContainer.classList.add('is-visible');
   }
@@ -78,10 +77,10 @@ let pokemonRepository = (function () {
     }
 });
 
-  // Calling Pokemon details
+  // Calling Pokemon details when button pressed
   function showDetails(pokemon) {
-  loadDetails(pokemon).then(function () {
-    showModal(pokemon.name, 'Height: ' + pokemon.height);
+  loadDetails(pokemon).then(function (pokemon) {
+    showModal(pokemon);
   });
 }
 
@@ -106,9 +105,7 @@ function loadList() {
       return response.json();
     }).then(function (details) {
       // Now we add the details to the item
-      item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      item.types = details.types;
+      return details;
     }).catch(function (e) {
       console.error(e);
     });
