@@ -18,7 +18,6 @@ let pokemonRepository = (function () {
       let modalTitle = document.querySelector('.modal-title');
       let modalImg = document.querySelector('.modal-img');
       let modalHeight = document.querySelector('.modal-height');
-      let modalTypes = document.querySelector('.modal-types')
 
       modalTitle.innerText = pokemon.name
       modalImg.setAttribute('src', pokemon.imageUrl)
