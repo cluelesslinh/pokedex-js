@@ -17,11 +17,19 @@ let pokemonRepository = (function() {
       let modalTitle = document.querySelector('.modal-title');
       let modalImg = document.querySelector('.modal-img');
       let modalHeight = document.querySelector('.modal-height');
+      let modalTypes = document.querySelector('.modal-types');
 
-      modalTitle.innerText = pokemon.name;
+      modalTitle.innerText = pokemon.name + ' # ' + pokemon.id;
       modalImg.setAttribute('src', pokemon.imageUrl);
       modalHeight.innerText = 'Height: ' + pokemon.height;
+      modalTypes.innerText = pokemonTypes(pokemon);
     });
+  }
+
+  function pokemonTypes(pokemon) {
+    return pokemon.types.length > 1
+      ? 'Types: [' + pokemon.types.join(', ') + ']'
+      : 'Type: [' + pokemon.types + ']';
   }
 
   function pokemonButton(button, pokemon) {
@@ -71,9 +79,13 @@ let pokemonRepository = (function() {
       })
       .then(function(details) {
         // Now we add the details to the item
-        item.imageUrl = details.sprites.front_default;
+        item.id = details.id;
+        item.imageUrl = details.sprites.other['official-artwork'].front_default;
         item.height = details.height;
-        item.types = details.types;
+        item.types = [];
+        details.types.forEach(function(pokeType) {
+          item.types.push(pokeType.type.name);
+        });
       })
       .catch(function(e) {
         console.error(e);
