@@ -2,8 +2,32 @@
   text-transform: capitalize;
 }
 
+.pokedex {
+  padding-top: 10%;
+  padding-left: 10%;
+}
+
+.pokemon-list {
+  list-style-type: none;
+  overflow: scroll;
+  text-align: center;
+  height: 350px;
+}
+
+.modal.fade:not(.in).right .modal-dialog {
+  transform: translate3d(50%, 0, 0);
+}
+
 .modal-title {
   text-transform: capitalize;
+}
+
+.modalImgDiv {
+  display: inline;
+}
+
+.modal-desc {
+  display: inline;
 }
 
 .modal-types {

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="img/pokeball.png" type="image/png" />
     <title>PokeDex</title>
     <link
       rel="stylesheet"
@@ -16,8 +17,10 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <a class="navbar-brand" href="#">Pokedex</a>
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"
+          ><img src="img/pokemon-logo.png" alt="pokemon-logo-img" width="200"
+        /></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -44,44 +47,47 @@
       </nav>
     </header>
 
-    <div class="pokedex-list">
-      <ul class="pokemon-list list-group"></ul>
-    </div>
+    <div class="pokedex col-4">
+      <ul class="pokemon-list list-group d-flex p-4"></ul>
 
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="pokemonModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="pokemonModal"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="pokemonModalLabel"></h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="modalImgDiv">
-              <img class="modal-img" width="50%" src="#" alt="" />
+      <!-- Modal -->
+      <div
+        class="modal fade right"
+        id="pokemonModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="pokemonModal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="pokemonModalLabel"></h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <div class="modal-height"></div>
-            <div class="modal-types"></div>
+            <div class="modal-body">
+              <div class="modalImgDiv">
+                <img class="modal-img" height="200" src="#" alt="" />
+                <div class="modal-desc"></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="modal-height"></div>
+              <div class="modal-weight"></div>
+              <div class="modal-types"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
