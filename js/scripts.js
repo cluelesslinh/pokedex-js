@@ -1,7 +1,6 @@
 let pokemonRepository = (function() {
   let pokemonList = [];
-  let pokeStat = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
-  let pokeDesc = 'https://pokeapi.co/api/v2/pokemon-species';
+  let pokeNameApi = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
 
   //Adding Pokemon to list
 
@@ -68,12 +67,12 @@ let pokemonRepository = (function() {
   //Fetching Pokemon description
 
   function fetchList() {
-    return fetch(pokeStat)
+    return fetch(pokeNameApi)
       .then(function(response) {
         return response.json();
       })
-      .then(function(stat) {
-        stat.results.forEach(function(item) {
+      .then(function(pokeName) {
+        pokeName.results.forEach(function(item) {
           let pokemon = {
             name: item.name,
             detailsUrl: item.url
@@ -87,21 +86,31 @@ let pokemonRepository = (function() {
   }
 
   function loadDetails(item) {
-    let url = item.detailsUrl;
-    return fetch(url)
+    let pokeDetails = item.detailsUrl;
+    return fetch(pokeDetails)
       .then(function(response) {
         return response.json();
       })
       .then(function(details) {
         item.id = details.id;
         item.imageUrl = details.sprites.other['official-artwork'].front_default;
+        item.species = details.species.url;
         item.height = details.height;
         item.weight = details.weight;
         item.types = [];
         details.types.forEach(function(pokeType) {
           item.types.push(pokeType.type.name);
         });
+
+        return fetch(details.species.url)
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(desc) {
+            item.desc = details.flavor_text_entries[0];
+          });
       })
+
       .catch(function(e) {
         console.error(e);
       });

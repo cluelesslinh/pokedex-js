@@ -47,41 +47,43 @@
       </nav>
     </header>
 
-    <div class="pokedex col-4">
-      <ul class="pokemon-list list-group d-flex p-4"></ul>
+    <div class="pokedex d-flex h-100">
+      <div class="row justify-content-center align-self-center col-5">
+        <ul class="pokemon-list list-group"></ul>
 
-      <!-- Modal -->
-      <div
-        class="modal fade right"
-        id="pokemonModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="pokemonModal"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="pokemonModalLabel"></h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="modalImgDiv">
-                <img class="modal-img" height="200" src="#" alt="" />
-                <div class="modal-desc"></div>
+        <!-- Modal -->
+        <div
+          class="modal fade right"
+          id="pokemonModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="pokemonModal"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="pokemonModalLabel"></h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-            </div>
-            <div class="modal-footer">
-              <div class="modal-height"></div>
-              <div class="modal-weight"></div>
-              <div class="modal-types"></div>
+              <div class="modal-body">
+                <div class="modalImgDiv">
+                  <img class="modal-img" height="200" src="#" alt="" />
+                  <div class="modal-desc"></div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="modal-height"></div>
+                <div class="modal-weight"></div>
+                <div class="modal-types"></div>
+              </div>
             </div>
           </div>
         </div>
