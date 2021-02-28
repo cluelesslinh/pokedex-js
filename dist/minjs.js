@@ -1,76 +1,103 @@
 let pokemonRepository = (function() {
-  let t = [],
-    e = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
-  function n(e) {
-    'object' == typeof e && t.push(e);
+  let e = [],
+    t = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
+  function n(t) {
+    'object' == typeof t && e.push(t);
   }
-  function o(t) {
-    i(t).then(function() {
-      let e = document.querySelector('.modal-title'),
+  function o(e) {
+    i(e).then(function() {
+      let t = document.querySelector('.modal-title'),
         n = document.querySelector('.modal-img'),
-        o = document.querySelector('.modal-height');
-      (e.innerText = t.name),
-        n.setAttribute('src', t.imageUrl),
-        (o.innerText = 'Height: ' + t.height);
+        o = document.querySelector('.modal-desc'),
+        i = document.querySelector('.modal-height'),
+        r = document.querySelector('.modal-weight'),
+        c = document.querySelector('.modal-types');
+      (t.innerText = '#' + e.id + ' - ' + e.name),
+        n.setAttribute('src', e.imageUrl),
+        (o.innerText = e.desc.replace(/\n/g, ' ')),
+        (i.innerText = 'Height: ' + e.height),
+        (r.innerText = 'Weight: ' + e.weight),
+        (c.innerText = (function(e) {
+          return e.types.length > 1
+            ? 'Types: [' + e.types.join(', ') + ']'
+            : 'Type: [' + e.types + ']';
+        })(e));
     });
   }
-  function i(t) {
-    let e = t.detailsUrl;
-    return fetch(e)
-      .then(function(t) {
-        return t.json();
-      })
+  function i(e) {
+    let t = e.detailsUrl;
+    return fetch(t)
       .then(function(e) {
-        (t.imageUrl = e.sprites.front_default),
-          (t.height = e.height),
-          (t.types = e.types);
+        return e.json();
       })
-      .catch(function(t) {
-        console.error(t);
+      .then(function(t) {
+        return (
+          (e.id = t.id),
+          (e.imageUrl = t.sprites.other['official-artwork'].front_default),
+          (e.species = t.species.url),
+          (e.height = t.height),
+          (e.weight = t.weight),
+          (e.types = []),
+          t.types.forEach(function(t) {
+            e.types.push(t.type.name);
+          }),
+          fetch(t.species.url)
+            .then(function(e) {
+              return e.json();
+            })
+            .then(function(t) {
+              e.desc = t.flavor_text_entries.find(
+                e => 'en' === e.language.name
+              ).flavor_text;
+            })
+        );
+      })
+      .catch(function(e) {
+        console.error(e);
       });
   }
   return {
     add: n,
     getAll: function() {
-      return t;
+      return e;
     },
-    addListItem: function(t) {
-      let e = document.querySelector('.pokemon-list'),
+    addListItem: function(e) {
+      let t = document.querySelector('.pokemon-list'),
         n = document.createElement('li'),
         i = document.createElement('button');
-      (i.innerText = t.name),
+      (i.innerText = e.name),
         i.setAttribute('data-toggle', 'modal'),
         i.setAttribute('data-target', '#pokemonModal'),
         i.classList.add('btn'),
         n.appendChild(i),
         n.classList.add('group-list-item'),
-        e.appendChild(n),
-        (function(t, e) {
-          t.addEventListener('click', function() {
-            o(e);
+        t.appendChild(n),
+        (function(e, t) {
+          e.addEventListener('click', function() {
+            o(t);
           });
-        })(i, t);
+        })(i, e);
     },
-    loadList: function() {
-      return fetch(e)
-        .then(function(t) {
-          return t.json();
+    fetchList: function() {
+      return fetch(t)
+        .then(function(e) {
+          return e.json();
         })
-        .then(function(t) {
-          t.results.forEach(function(t) {
-            n({ name: t.name, detailsUrl: t.url });
+        .then(function(e) {
+          e.results.forEach(function(e) {
+            n({ name: e.name, detailsUrl: e.url });
           });
         })
-        .catch(function(t) {
-          console.error(t);
+        .catch(function(e) {
+          console.error(e);
         });
     },
     loadDetails: i,
     showDetails: o
   };
 })();
-pokemonRepository.loadList().then(function() {
-  pokemonRepository.getAll().forEach(function(t) {
-    pokemonRepository.addListItem(t);
+pokemonRepository.fetchList().then(function() {
+  pokemonRepository.getAll().forEach(function(e) {
+    pokemonRepository.addListItem(e);
   });
 });

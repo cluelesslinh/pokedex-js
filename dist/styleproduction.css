@@ -1,0 +1,66 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+html,
+body {
+  height: 80vh;
+}
+
+.btn {
+  text-transform: capitalize;
+  color: White;
+}
+
+.pokedex {
+  background-color: Red;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.pokemon-list {
+  list-style-type: none;
+  overflow: scroll;
+  height: 350px;
+  background-color: Black;
+}
+
+.modal.fade:not(.in).right .modal-dialog {
+  -webkit-transform: translate3d(25%, 0, 0);
+  transform: translate3d(25%, 0, 0);
+}
+
+.modal-dialog {
+  width: 50%;
+}
+
+.modal-content {
+  background-color: Silver;
+}
+
+.modal-title {
+  text-transform: capitalize;
+}
+
+.modalImgDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.modal-desc {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+}
+
+.modal-types {
+  text-transform: capitalize;
+}
