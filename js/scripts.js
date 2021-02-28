@@ -27,7 +27,7 @@ let pokemonRepository = (function() {
 
       modalTitle.innerText = '#' + pokemon.id + ' - ' + pokemon.name;
       modalImg.setAttribute('src', pokemon.imageUrl);
-      modalDesc.innerText = pokemon.desc;
+      modalDesc.innerText = pokemon.desc.replace(/\n/g, ' ');
       modalHeight.innerText = 'Height: ' + pokemon.height;
       modalWeight.innerText = 'Weight: ' + pokemon.weight;
       modalTypes.innerText = pokemonTypes(pokemon);
@@ -107,7 +107,9 @@ let pokemonRepository = (function() {
             return response.json();
           })
           .then(function(desc) {
-            item.desc = details.flavor_text_entries[0];
+            item.desc = desc.flavor_text_entries.find(
+              entry => entry.language.name === 'en'
+            ).flavor_text;
           });
       })
 
