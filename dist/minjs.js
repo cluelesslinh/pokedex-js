@@ -6,21 +6,23 @@ let pokemonRepository = (function() {
   }
   function o(e) {
     i(e).then(function() {
-      let t = document.querySelector('.modal-title'),
-        n = document.querySelector('.modal-img'),
-        o = document.querySelector('.modal-desc'),
-        i = document.querySelector('.modal-height'),
-        r = document.querySelector('.modal-weight'),
-        c = document.querySelector('.modal-types');
-      (t.innerText = '#' + e.id + ' - ' + e.name),
-        n.setAttribute('src', e.imageUrl),
-        (o.innerText = e.desc.replace(/\n/g, ' ')),
-        (i.innerText = 'Height: ' + e.height),
-        (r.innerText = 'Weight: ' + e.weight),
-        (c.innerText = (function(e) {
+      let t = document.querySelector('.pokemon-name-box'),
+        n = document.querySelector('.pokemon-id-box'),
+        o = document.querySelector('.pokemon-image'),
+        i = document.querySelector('.pokemon-description'),
+        r = document.querySelector('.pokemon-height'),
+        c = document.querySelector('.pokemon-weight'),
+        u = document.querySelector('.pokemon-types');
+      (t.innerText = e.name),
+        (n.innerText = e.id),
+        o.setAttribute('src', e.imageUrl),
+        (i.innerText = e.desc.replace(/\n/g, ' ')),
+        (r.innerText = 'Height: ' + 10 * e.height + ' cm'),
+        (c.innerText = 'Weight: ' + e.weight / 10 + ' kg'),
+        (u.innerText = (function(e) {
           return e.types.length > 1
-            ? 'Types: [' + e.types.join(', ') + ']'
-            : 'Type: [' + e.types + ']';
+            ? '[ ' + e.types.join(', ') + ' ]'
+            : '[ ' + e.types + ' ]';
         })(e));
     });
   }
@@ -62,12 +64,10 @@ let pokemonRepository = (function() {
       return e;
     },
     addListItem: function(e) {
-      let t = document.querySelector('.pokemon-list'),
+      let t = document.querySelector('.pokemon-search-list'),
         n = document.createElement('li'),
         i = document.createElement('button');
       (i.innerText = e.name),
-        i.setAttribute('data-toggle', 'modal'),
-        i.setAttribute('data-target', '#pokemonModal'),
         i.classList.add('btn'),
         n.appendChild(i),
         n.classList.add('group-list-item'),
@@ -96,6 +96,15 @@ let pokemonRepository = (function() {
     showDetails: o
   };
 })();
+function searchPokemon() {
+  let e = document.querySelector('#pokemon-search').value.toLowerCase(),
+    t = document.querySelectorAll('.group-list-item');
+  for (let n = 0; n < t.length; n++) {
+    t[n].innerText.toLowerCase().indexOf(e) > -1
+      ? (t[n].style.display = '')
+      : (t[n].style.display = 'none');
+  }
+}
 pokemonRepository.fetchList().then(function() {
   pokemonRepository.getAll().forEach(function(e) {
     pokemonRepository.addListItem(e);

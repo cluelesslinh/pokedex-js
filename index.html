@@ -4,15 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="img/pokeball.png" type="image/png" />
-    <title>PokeDex</title>
+    <title>Pokedex</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
-
-    <link href="dist/styleproduction.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="dist/styleproduction.css" type="text/css" />
   </head>
 
   <body>
@@ -47,49 +46,76 @@
       </nav>
     </header>
 
-    <div class="pokedex d-flex h-100">
-      <div class="row justify-content-center align-self-center col-5">
-        <ul class="pokemon-list list-group"></ul>
+    <div class="pokedex">
+      <div class="pokedex-top-first-half">
+        <div class="pokedex-top">
+          <div class="pokedex-camera"></div>
+          <div class="pokedex-red-light"></div>
+          <div class="pokedex-yellow-light"></div>
+          <div class="pokedex-green-light"></div>
+        </div>
 
-        <!-- Modal -->
-        <div
-          class="modal fade right"
-          id="pokemonModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="pokemonModal"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="pokemonModalLabel"></h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="modalImgDiv">
-                  <img class="modal-img" height="200" src="#" alt="" />
-                  <div class="modal-desc"></div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <div class="modal-height"></div>
-                <div class="modal-weight"></div>
-                <div class="modal-types"></div>
+        <div class="pokedex-left">
+          <div class="pokemon-name-id">
+            <div class="pokemon-name-box"></div>
+            <div class="pokemon-id-box"></div>
+          </div>
+
+          <div class="pokedex-image-border">
+            <div class="top-red-buttons">
+              <div class="red-button"></div>
+              <div class="red-button"></div>
+            </div>
+
+            <div class="pokemon-image-box">
+              <img class="pokemon-image" src="#" alt="" />
+            </div>
+
+            <div class="pokedex-record-speakers">
+              <div class="pokedex-record-button"></div>
+              <div class="pokedex-speakers">
+                <div class="pokedex-speaker"></div>
+                <div class="pokedex-speaker"></div>
+                <div class="pokedex-speaker"></div>
+                <div class="pokedex-speaker"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <div class="pokedex-middle-right">
+        <div class="pokedex-middle"></div>
 
+        <div class="pokedex-right">
+          <div class="pokemon-description"></div>
+
+          <div class="pokemon-info-type">
+            <div class="pokemon-info">
+              <div class="pokemon-height"></div>
+              <div class="pokemon-weight"></div>
+            </div>
+            <div class="pokemon-types"></div>
+          </div>
+
+          <div class="pokemon-search-box">
+            <div class="pokemon-search-left">
+              <ul class="pokemon-search-list group-list-item"></ul>
+            </div>
+            <div class="pokemon-search-right">
+              <input
+                id="pokemon-search"
+                oninput="searchPokemon()"
+                placeholder="Pokemon Name"
+                class="pokemon-search-bar"
+                type="search"
+                aria-label="Search"
+              />
+            </div>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

@@ -14,32 +14,34 @@ let pokemonRepository = (function() {
     return pokemonList;
   }
 
-  //Pokemon details for modal
+  //Pokemon details
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function() {
-      let modalTitle = document.querySelector('.modal-title');
-      let modalImg = document.querySelector('.modal-img');
-      let modalDesc = document.querySelector('.modal-desc');
-      let modalHeight = document.querySelector('.modal-height');
-      let modalWeight = document.querySelector('.modal-weight');
-      let modalTypes = document.querySelector('.modal-types');
+      let pokemonName = document.querySelector('.pokemon-name-box');
+      let pokemonIdNumber = document.querySelector('.pokemon-id-box');
+      let pokemonImage = document.querySelector('.pokemon-image');
+      let pokemonDesc = document.querySelector('.pokemon-description');
+      let pokemonHeight = document.querySelector('.pokemon-height');
+      let pokemonWeight = document.querySelector('.pokemon-weight');
+      let pokemonTypes = document.querySelector('.pokemon-types');
 
-      modalTitle.innerText = '#' + pokemon.id + ' - ' + pokemon.name;
-      modalImg.setAttribute('src', pokemon.imageUrl);
-      modalDesc.innerText = pokemon.desc.replace(/\n/g, ' ');
-      modalHeight.innerText = 'Height: ' + pokemon.height;
-      modalWeight.innerText = 'Weight: ' + pokemon.weight;
-      modalTypes.innerText = pokemonTypes(pokemon);
+      pokemonName.innerText = pokemon.name;
+      pokemonIdNumber.innerText = pokemon.id;
+      pokemonImage.setAttribute('src', pokemon.imageUrl);
+      pokemonDesc.innerText = pokemon.desc.replace(/\n/g, ' ');
+      pokemonHeight.innerText = 'Height: ' + pokemon.height * 10 + ' cm';
+      pokemonWeight.innerText = 'Weight: ' + pokemon.weight / 10 + ' kg';
+      pokemonTypes.innerText = callPokemonTypes(pokemon);
     });
   }
 
   //Calling for Pokemon types from complex object
 
-  function pokemonTypes(pokemon) {
+  function callPokemonTypes(pokemon) {
     return pokemon.types.length > 1
-      ? 'Types: [' + pokemon.types.join(', ') + ']'
-      : 'Type: [' + pokemon.types + ']';
+      ? '[ ' + pokemon.types.join(', ') + ' ]'
+      : '[ ' + pokemon.types + ' ]';
   }
 
   //Creating buttons for each Pokemon
@@ -51,12 +53,10 @@ let pokemonRepository = (function() {
   }
 
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector('.pokemon-list');
+    let pokemonList = document.querySelector('.pokemon-search-list');
     let listItem = document.createElement('li');
     let button = document.createElement('button');
     button.innerText = pokemon.name;
-    button.setAttribute('data-toggle', 'modal');
-    button.setAttribute('data-target', '#pokemonModal');
     button.classList.add('btn');
     listItem.appendChild(button);
     listItem.classList.add('group-list-item');
@@ -135,3 +135,19 @@ pokemonRepository.fetchList().then(function() {
     pokemonRepository.addListItem(pokemon);
   });
 });
+
+//Search bar
+
+function searchPokemon() {
+  let searchText = document.querySelector('#pokemon-search').value;
+  let x = searchText.toLowerCase();
+  let pokes = document.querySelectorAll('.group-list-item');
+  for (let i = 0; i < pokes.length; i++) {
+    let y = pokes[i].innerText;
+    if (y.toLowerCase().indexOf(x) > -1) {
+      pokes[i].style.display = '';
+    } else {
+      pokes[i].style.display = 'none';
+    }
+  }
+}
