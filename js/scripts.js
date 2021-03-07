@@ -18,8 +18,8 @@ let pokemonRepository = (function() {
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function() {
-      let pokemonName = document.querySelector('.pokemon-name-box');
-      let pokemonIdNumber = document.querySelector('.pokemon-id-box');
+      let pokemonName = document.querySelector('.pokemon-name');
+      let pokemonIdNumber = document.querySelector('.pokemon-id');
       let pokemonImage = document.querySelector('.pokemon-image');
       let pokemonDesc = document.querySelector('.pokemon-description');
       let pokemonHeight = document.querySelector('.pokemon-height');
@@ -39,9 +39,7 @@ let pokemonRepository = (function() {
   //Calling for Pokemon types from complex object
 
   function callPokemonTypes(pokemon) {
-    return pokemon.types.length > 1
-      ? '[ ' + pokemon.types.join(', ') + ' ]'
-      : '[ ' + pokemon.types + ' ]';
+    return pokemon.types.length > 1 ? pokemon.types.join('\n') : pokemon.types;
   }
 
   //Creating buttons for each Pokemon

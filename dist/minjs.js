@@ -6,8 +6,8 @@ let pokemonRepository = (function() {
   }
   function o(e) {
     i(e).then(function() {
-      let t = document.querySelector('.pokemon-name-box'),
-        n = document.querySelector('.pokemon-id-box'),
+      let t = document.querySelector('.pokemon-name'),
+        n = document.querySelector('.pokemon-id'),
         o = document.querySelector('.pokemon-image'),
         i = document.querySelector('.pokemon-description'),
         r = document.querySelector('.pokemon-height'),
@@ -20,9 +20,7 @@ let pokemonRepository = (function() {
         (r.innerText = 'Height: ' + 10 * e.height + ' cm'),
         (c.innerText = 'Weight: ' + e.weight / 10 + ' kg'),
         (u.innerText = (function(e) {
-          return e.types.length > 1
-            ? '[ ' + e.types.join(', ') + ' ]'
-            : '[ ' + e.types + ' ]';
+          return e.types.length > 1 ? e.types.join('\n') : e.types;
         })(e));
     });
   }
