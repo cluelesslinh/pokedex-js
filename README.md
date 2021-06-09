@@ -2,7 +2,7 @@
 
 - [Project Description](#Description)
 - [Use](#Use)
-- [[Techs](#Techs)
+- [Techs](#Techs)
 - [Requirements](#Requirements)
 
 ## Description
